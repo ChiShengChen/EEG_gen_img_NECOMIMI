@@ -21,8 +21,6 @@ This paper describes a comprehensive methodology that combines EEG signal proces
 ## Experiments and Findings
 Experiments demonstrate NERV's effectiveness across several zero-shot classification tasks, with a detailed exploration of the conceptual challenges in translating EEG data into precise visual representations. Despite its advancements, the generated images predominantly abstract, highlighting the inherent difficulties in processing EEG signals.
 
-## Citation
-Hope this results and idea is helpful. I would appreciate you citing us in your paper, and the github.
 
 
 
