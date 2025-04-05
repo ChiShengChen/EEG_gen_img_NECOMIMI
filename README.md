@@ -1,18 +1,31 @@
-# Brain Decoding and Image Reconstruction from EEG using NervformerV2
+# NECOMIMI: Neural-Cognitive Multimodal EEG-Informed Image Generation with Diffusion Models
+[![arXiv](https://img.shields.io/badge/arXiv-2410.00712-b31b1b.svg?style=flat-square)](https://arxiv.org/abs/2410.00712)  
+## Abstract
+NECOMIMI introduces a groundbreaking framework for generating images directly from EEG signals using advanced diffusion models. This work not only pushes the boundaries of EEG-image classification but extends into image generation, presenting a novel EEG encoder, NERV, that shows state-of-the-art performance across multiple zero-shot classification tasks.
+![2024-12-02 09-38-43 的螢幕擷圖](https://github.com/user-attachments/assets/73f39ff1-e874-43b5-a953-fbfeacadf5e3)
 
-This repository contains code for decoding and reconstructing visual stimuli from EEG signals using multiple deep learning approaches, with the NervformerV2 (NERV) model demonstrating superior performance compared to other architectures.
+## Introduction
+EEG has been a valuable tool in clinical settings, like diagnosing epilepsy and depression. However, with technological advancements, its application has expanded into real-time brain function analysis and now, into the challenging field of image generation from neural signals.
 
-<img src="framework.png" alt="Framework" style="max-width: 90%; height: auto;"/>
+## Methodology
+![2024-12-02 09-39-15 的螢幕擷圖](https://github.com/user-attachments/assets/129e02b3-6824-4ce9-8057-ecd3d2679d04)
 
-## Overview
+This paper describes a comprehensive methodology that combines EEG signal processing and diffusion models to generate images. We introduce a novel two-stage image generation process and establish the CAT Score as a new metric tailored for EEG-to-image evaluation, setting a benchmark on the ThingsEEG dataset.
+![2024-12-02 09-40-00 的螢幕擷圖](https://github.com/user-attachments/assets/dea2321b-4cb0-45c9-b9f2-9c3e653fbd62)
 
-Our approach effectively translates brain activity (EEG signals) into visual representations using advanced neural architectures. The NervformerV2 model improves upon previous methods through:
+## Key Contributions
+- Introduction of the NERV EEG encoder that demonstrates exceptional performance in EEG-based image generation.
+- Development of a two-stage generative framework that enhances image quality and semantic accuracy.
+- Proposal of the Category-based Assessment Table (CAT) Score for evaluating EEG-informed image generation.
 
-1. **Enhanced Attention Mechanisms**: Dual-pathway architecture with specialized attention for both temporal and spatial EEG features
-2. **Cross-modal Learning**: Integration of both image and text representations during training
-3. **Subject-specific Adaptations**: Personalized linear transformations for individual subjects
+## Experiments and Findings
+Experiments demonstrate NERV's effectiveness across several zero-shot classification tasks, with a detailed exploration of the conceptual challenges in translating EEG data into precise visual representations. Despite its advancements, the generated images predominantly abstract, highlighting the inherent difficulties in processing EEG signals.
 
-<img src="fig-genexample.png" alt="Examples of image reconstruction" style="max-width: 100%; height: auto;"/>  
+## Citation
+Hope this results and idea is helpful. I would appreciate you citing us in your paper, and the github.
+
+
+
 
 ## Model Architectures
 
@@ -24,17 +37,6 @@ We implement and evaluate multiple model architectures:
 - **ATMS_50**: A model with attention but simpler convolutional processing
 - **NICE_EEG**: A baseline model with minimal processing
 
-## Performance Comparison
-
-Our experiments show NervformerV2 consistently outperforms other models across retrieval and generation metrics:
-
-| Model | Image Retrieval (Top-1) | Image Retrieval (Top-5) | FID Score | CLIP Similarity |
-|-------|-------------------------|-------------------------|-----------|-----------------|
-| NervformerV2 | **0.76** | **0.92** | **132.4** | **0.28** |
-| NervformerV1 | 0.71 | 0.89 | 147.3 | 0.25 |
-| MUSE_EEG | 0.63 | 0.84 | 163.5 | 0.22 |
-| ATMS_50 | 0.59 | 0.78 | 171.2 | 0.20 |
-| NICE_EEG | 0.48 | 0.69 | 189.7 | 0.16 |
 
 ## Getting Started
 
@@ -115,7 +117,7 @@ jupyter notebook MEG-preprocessing/pre_possess.ipynb
 ## Repository Structure
 
 ```
-EEG_Image_decode/
+EEG_gen_img_NECOMIMI/
 ├── Retrieval/                # EEG feature extraction and retrieval experiments
 │   ├── NervformerV2_insubject_retrieval.py  # Main NervformerV2 training code
 │   ├── NervformerV1_insubject_retrieval.py
@@ -173,6 +175,15 @@ Additionally, please cite the following works that contributed to this research:
   author={Song, Yonghao and Liu, Bingchuan and Li, Xiang and Shi, Nanlin and Wang, Yijun and Gao, Xiaorong},
   journal={arXiv preprint arXiv:2308.13234},
   year={2023}
+}
+```
+4. This paper:
+```
+@article{chen2024necomimi,
+  title={NECOMIMI: Neural-Cognitive Multimodal EEG-informed Image Generation with Diffusion Models},
+  author={Chen, Chi-Sheng},
+  journal={arXiv preprint arXiv:2410.00712},
+  year={2024}
 }
 ```
 
