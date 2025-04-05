@@ -136,6 +136,8 @@ EEG_gen_img_NECOMIMI/
 └── README.md                 # This file
 ```
 
+Most code are modified from [ATM](https://github.com/dongyangli-del/EEG_Image_decode).
+
 ## Citation
 
 If you use this code or find it helpful for your research, please cite our work:
