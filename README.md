@@ -2,16 +2,20 @@
 [![arXiv](https://img.shields.io/badge/arXiv-2410.00712-b31b1b.svg?style=flat-square)](https://arxiv.org/abs/2410.00712)  
 ## Abstract
 NECOMIMI introduces a groundbreaking framework for generating images directly from EEG signals using advanced diffusion models. This work not only pushes the boundaries of EEG-image classification but extends into image generation, presenting a novel EEG encoder, NERV, that shows state-of-the-art performance across multiple zero-shot classification tasks.
-![2024-12-02 09-38-43 的螢幕擷圖](https://github.com/user-attachments/assets/73f39ff1-e874-43b5-a953-fbfeacadf5e3)
+
+![image](https://github.com/user-attachments/assets/df768db1-764b-4234-9630-527cb5059f32)
+
 
 ## Introduction
 EEG has been a valuable tool in clinical settings, like diagnosing epilepsy and depression. However, with technological advancements, its application has expanded into real-time brain function analysis and now, into the challenging field of image generation from neural signals.
 
 ## Methodology
-![2024-12-02 09-39-15 的螢幕擷圖](https://github.com/user-attachments/assets/129e02b3-6824-4ce9-8057-ecd3d2679d04)
+![image](https://github.com/user-attachments/assets/0db21255-20b5-481b-aefc-bb0c561f0c3c)
+
 
 This paper describes a comprehensive methodology that combines EEG signal processing and diffusion models to generate images. We introduce a novel two-stage image generation process and establish the CAT Score as a new metric tailored for EEG-to-image evaluation, setting a benchmark on the ThingsEEG dataset.
-![2024-12-02 09-40-00 的螢幕擷圖](https://github.com/user-attachments/assets/dea2321b-4cb0-45c9-b9f2-9c3e653fbd62)
+
+![image](https://github.com/user-attachments/assets/4e507ed2-c75c-4a06-88da-7f29cf454a6f)
 
 ## Key Contributions
 - Introduction of the NERV EEG encoder that demonstrates exceptional performance in EEG-based image generation.
