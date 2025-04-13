@@ -32,9 +32,9 @@ train_and_evaluate() {
     # Step 3: Generate images
     python "${MODEL}_insubject_retrival_All_train_dfs_step2.py" --subject $SUBJECT --num_images 5
     
-    # Step 4: Compute metrics
-    cd ../Retrieval
-    python compute_retrieval_metrics.py --model $MODEL --subject $SUBJECT >> "../comparison_results/${MODEL}_${SUBJECT}_metrics.txt"
+    # # Step 4: Compute metrics
+    # cd ../Retrieval
+    # python compute_retrieval_metrics.py --model $MODEL --subject $SUBJECT >> "../comparison_results/${MODEL}_${SUBJECT}_metrics.txt"
     
     echo "Completed evaluation for $MODEL"
     cd ..
@@ -47,10 +47,10 @@ for MODEL in "${MODELS[@]}"; do
     train_and_evaluate $MODEL
 done
 
-# Generate comparison graph
-echo "Generating comparison visualization..."
-cd comparison_results
-python ../scripts/visualize_comparison.py --subject $SUBJECT --models "${MODELS[@]}"
+# # Generate comparison graph
+# echo "Generating comparison visualization..."
+# cd comparison_results
+# python ../scripts/visualize_comparison.py --subject $SUBJECT --models "${MODELS[@]}"
 
-echo "Comparison completed! Results can be found in comparison_results/"
-echo "The visualization clearly shows NervformerV2 (NERV) outperforming all other models." 
+# echo "Comparison completed! Results can be found in comparison_results/"
+# echo "The visualization clearly shows NervformerV2 (NERV) outperforming all other models." 
