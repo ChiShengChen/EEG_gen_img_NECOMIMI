@@ -138,6 +138,11 @@ EEG_gen_img_NECOMIMI/
 
 Most code are modified from [ATM](https://github.com/dongyangli-del/EEG_Image_decode).
 
+## Conputing Cost
+For running image generation need almost 30 GB VRAM:
+<img width="667" alt="image" src="https://github.com/user-attachments/assets/3f128cb2-01b1-4232-bcbb-f27709b2afcd" />
+
+
 ## Citation
 
 If you use this code or find it helpful for your research, please cite our work:
