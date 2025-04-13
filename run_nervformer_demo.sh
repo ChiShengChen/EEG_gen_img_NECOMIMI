@@ -25,14 +25,14 @@ python NervformerV2_insubject_retrival_All_extracted_feature_step1.py --subject 
 echo "Step 3: Generating images from EEG features"
 python NervformerV2_insubject_retrival_All_train_dfs_step2.py --subject $SUBJECT --num_images 10
 
-# Step 4: Compute evaluation metrics
-echo "Step 4: Computing evaluation metrics"
-cd fMRI-reconstruction-NSD/src
-python compute_metrics.py --subject $SUBJECT --model NervformerV2
+# # Step 4: Compute evaluation metrics
+# echo "Step 4: Computing evaluation metrics"
+# cd fMRI-reconstruction-NSD/src
+# python compute_metrics.py --subject $SUBJECT --model NervformerV2
 
-echo "Demo completed! Results can be found in:"
-echo "- Generated images: Generation/gen_images/"
-echo "- Metrics: Generation/fMRI-reconstruction-NSD/src/metrics_results.csv"
+# echo "Demo completed! Results can be found in:"
+# echo "- Generated images: Generation/gen_images/"
+# echo "- Metrics: Generation/fMRI-reconstruction-NSD/src/metrics_results.csv"
 
-echo "To compare with other models, run the following scripts:"
-echo "- bash run_comparison.sh $SUBJECT" 
+# echo "To compare with other models, run the following scripts:"
+# echo "- bash run_comparison.sh $SUBJECT" 
