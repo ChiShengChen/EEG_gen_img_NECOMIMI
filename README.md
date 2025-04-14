@@ -138,6 +138,135 @@ EEG_gen_img_NECOMIMI/
 
 Most code are modified from [ATM](https://github.com/dongyangli-del/EEG_Image_decode).
 
+## Channel Perturbation Experiment
+
+This experiment aims to evaluate the model's reliance on signals from specific EEG channels, particularly those associated with the visual cortex. By replacing the signals from these channels with Gaussian noise, we can observe the impact on the quality of the final generated images.
+
+**Required Scripts:**
+
+*   `Generation/NervformerV2_insubject_retrival_perturbed_visual_feature_step1.py`: Used to extract perturbed EEG features.
+*   `Generation/NervformerV2_insubject_retrival_perturbed_visual_train_dfs_step2.py`: Used to train a Diffusion Prior model adapted to the perturbed features and generate the final images.
+
+**Execution Steps:**
+
+**Important:** Before starting, ensure you have pre-trained `NervFormerV2` model weights (e.g., `best.pth`) available for all subjects (`sub-01` to `sub-10`) under `Retrieval/models/contrast/NervFormerV2/`. The `step1` script will attempt to load these weights. Also, verify that the `VISUAL_CORTEX_CHANNEL_INDICES` list in the `step1` script is correctly set to the indices of the channels you wish to perturb.
+
+1.  **Step 1a: Extract Perturbed *Training Set* EEG Features**
+    *   **Purpose:** Generate EEG features from the training set with noise added for all subjects. These are needed for training the Diffusion Prior model in `step2`.
+    *   **Configuration:** Edit `Generation/NervformerV2_insubject_retrival_perturbed_visual_feature_step1.py` and ensure the `PROCESS_TRAIN_DATA` variable is set to `True`:
+        ```python
+        # --- Decide which data split to process (train or test) ---
+        PROCESS_TRAIN_DATA = True # Set to True to process train data
+        # --- --- ---
+        ```
+    *   **Execution:**
+        ```bash
+        cd Generation
+        python NervformerV2_insubject_retrival_perturbed_visual_feature_step1.py
+        cd ..
+        ```
+    *   **Check:** Verify that the script runs successfully for each subject and generates `..._train_perturbed_visual.pt` files in the corresponding `Generation/NervformerV2_eeg_feature/sub-XX/perturbed_visual/` directories.
+
+2.  **Step 1b: Extract Perturbed *Test Set* EEG Features**
+    *   **Purpose:** Generate EEG features from the test set with noise added for all subjects. These are needed for the final image generation in `step2`.
+    *   **Configuration:** Edit `Generation/NervformerV2_insubject_retrival_perturbed_visual_feature_step1.py` and ensure the `PROCESS_TRAIN_DATA` variable is set to `False`:
+        ```python
+        # --- Decide which data split to process (train or test) ---
+        PROCESS_TRAIN_DATA = False # Set to False to process test data
+        # --- --- ---
+        ```
+    *   **Execution:**
+        ```bash
+        cd Generation
+        python NervformerV2_insubject_retrival_perturbed_visual_feature_step1.py
+        cd ..
+        ```
+    *   **Check:** Verify that the script runs successfully for each subject and generates `..._test_perturbed_visual.pt` files in the corresponding `Generation/NervformerV2_eeg_feature/sub-XX/perturbed_visual/` directories.
+
+3.  **Step 2: Train Diffusion Prior and Generate Images**
+    *   **Purpose:** (1) Train a Diffusion Prior model adapted to the perturbed data, using the perturbed training features from `sub-01`. (2) Use this trained prior model, along with each subject's perturbed test set features, to generate images.
+    *   **Execution:**
+        ```bash
+        cd Generation
+        python NervformerV2_insubject_retrival_perturbed_visual_train_dfs_step2.py
+        cd ..
+        ```
+    *   **Note:** This step will first train the Diffusion Prior model (default 150 epochs), which may take a significant amount of time. After training, the model weights will be saved to `Generation/ckpts/diffusion_prior_All_perturbed.pt`. The script will then automatically proceed to the image generation phase.
+
+4.  **Review Results:**
+    *   The generated images will be saved in the `Generation/gen_images_perturbed_visual/` directory, organized into subdirectories by subject (e.g., `Generation/gen_images_perturbed_visual/sub-01/`, `Generation/gen_images_perturbed_visual/sub-02/`, etc.).
+    *   Compare these images with the original images generated without perturbation to assess the impact of the visual cortex channel perturbation on the generation results.
+
+**Summary:** It is crucial to run the `step1` script twice (once for the training set with `True`, once for the test set with `False`) to ensure the `step2` script has all the necessary input feature files before it can successfully execute the Diffusion Prior training and final image generation.
+
+---
+
+## Original Model Image Generation
+
+This section describes how to generate images using the original EEG features (without perturbation) for the different baseline models (NervformerV2, NervformerV1, MUSE, ATMS_50).
+
+The process involves two main steps for each model:
+1.  **Extract EEG Features:** Use the corresponding `_extracted_feature_step1.py` script to process the EEG data with the pre-trained encoder for that model and save the features.
+2.  **Generate Images:** Use the corresponding `_train_dfs_step2.py` script to load the extracted features and generate images, typically using a pre-trained Diffusion Prior model (`diffusion_prior_All.pt`).
+
+**General Workflow (Repeat for each model and subject):**
+
+**Important:** Before starting, ensure you have the appropriate pre-trained EEG encoder model weights available for the specific model and subject you want to process (e.g., under `Retrieval/models/contrast/[MODEL_NAME]/sub-XX/`). The respective `step1` scripts need these weights.
+
+1.  **Step 1a: Extract *Training Set* Features**
+    *   **Purpose:** Generate original EEG features from the training set for the chosen model and subject.
+    *   **Configuration:** In the relevant `..._extracted_feature_step1.py` script (e.g., `MUSE_insubject_retrival_All_extracted_feature_step1.py`), ensure the `sub` variable is set to the desired subject ID (e.g., `sub = 'sub-02'`). Also ensure the script is configured to process the **training** data (this might involve commenting/uncommenting `EEGDataset` lines or similar logic within the script - check the script details).
+    *   **Execution:**
+        ```bash
+        cd Generation
+        python [MODEL_NAME]_insubject_retrival_All_extracted_feature_step1.py
+        cd ..
+        ```
+        (Replace `[MODEL_NAME]` with `NervformerV2`, `NervformerV1`, `MUSE`, or `ATM_S`)
+    *   **Check:** Verify that the script generates the `..._train.pt` feature file in the corresponding `Generation/[MODEL_NAME]_eeg_feature/sub-XX/` directory.
+
+2.  **Step 1b: Extract *Test Set* Features**
+    *   **Purpose:** Generate original EEG features from the test set for the chosen model and subject.
+    *   **Configuration:** In the same `..._extracted_feature_step1.py` script, ensure `sub` is set correctly. Configure the script to process the **test** data (again, check the script for specific lines to modify, often related to the `EEGDataset(..., train=False)` call).
+    *   **Execution:**
+        ```bash
+        cd Generation
+        python [MODEL_NAME]_insubject_retrival_All_extracted_feature_step1.py
+        cd ..
+        ```
+    *   **Check:** Verify that the script generates the `..._test.pt` feature file in the corresponding `Generation/[MODEL_NAME]_eeg_feature/sub-XX/` directory.
+
+3.  **Step 2: Generate Images**
+    *   **Purpose:** Load the training and test features generated in the previous steps and generate images using the pre-trained Diffusion Prior (`diffusion_prior_All.pt`).
+    *   **Configuration:** In the relevant `..._train_dfs_step2.py` script (e.g., `MUSE_insubject_retrival_All_train_dfs_step2.py`), ensure the `sub` variable matches the subject processed in Step 1. Verify that the script is set up to **load** the pre-trained Diffusion Prior (`./ckpts/diffusion_prior_All.pt`) and **not** retrain it (i.e., the `pipe.train` line should be commented out).
+    *   **Execution:**
+        ```bash
+        cd Generation
+        python [MODEL_NAME]_insubject_retrival_All_train_dfs_step2.py
+        cd ..
+        ```
+    *   **Note:** The script needs both `..._train.pt` and `..._test.pt` feature files from Step 1 to exist.
+
+4.  **Review Results:**
+    *   Generated images are typically saved in `./Generation/gen_images/` with filenames indicating the model and subject.
+
+**Model-Specific Scripts:**
+
+*   **NervformerV2:**
+    *   Step 1: `NervformerV2_insubject_retrival_All_extracted_feature_step1.py`
+    *   Step 2: `NervformerV2_insubject_retrival_All_train_dfs_step2.py` (or `_2.py`)
+*   **NervformerV1:**
+    *   Step 1: `NervformerV1_insubject_retrival_All_extracted_feature_step1.py`
+    *   Step 2: `NervformerV1_insubject_retrival_All_train_dfs_step2.py`
+*   **MUSE:**
+    *   Step 1: `MUSE_insubject_retrival_All_extracted_feature_step1.py`
+    *   Step 2: `MUSE_insubject_retrival_All_train_dfs_step2.py`
+*   **ATMS_50 (ATM_S):**
+    *   Step 1: `ATM_S_insubject_retrival_All_extracted_feature_step1.py`
+    *   Step 2: `ATM_S_insubject_retrival_All_train_dfs_step2.py`
+
+**Note on Looping:** The original scripts are often hardcoded for a single subject. To process all subjects automatically, you would need to modify the scripts to include a loop over subject IDs, similar to how the perturbed scripts were modified, ensuring paths are updated correctly within the loop. 
+
 ## Computing Cost
 For running image generation need almost 30 GB VRAM:
 <img width="667" alt="image" src="https://github.com/user-attachments/assets/3f128cb2-01b1-4232-bcbb-f27709b2afcd" />
