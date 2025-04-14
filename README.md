@@ -252,7 +252,7 @@ The process involves two main steps for each model:
 
 **Model-Specific Scripts:**
 
-*   **NervformerV2:**
+*   **NervformerV2(NERV):**
     *   Step 1: `NervformerV2_insubject_retrival_All_extracted_feature_step1.py`
     *   Step 2: `NervformerV2_insubject_retrival_All_train_dfs_step2.py` (or `_2.py`)
 *   **NervformerV1:**
