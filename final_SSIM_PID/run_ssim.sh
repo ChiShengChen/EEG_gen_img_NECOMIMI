@@ -1,0 +1,1 @@
+python final_SSIM_PID/calculate_fid.py --gen_images_dir /home/aidan/EEG_Image_decode_old/Generation/gen_images_perturbed_visual --output_dir /home/aidan/EEG_Image_decode_old/final_SSIM_PID/perturbed_visual --gt_images_dir /home/aidan/EEG_Image_decode_old/image_set/test_images --fid_results_filename fid_results.csv

@@ -1,0 +1,16 @@
+model,emb_type,overall_avg_ssim,overall_std_ssim,total_image_count,subject_count
+ATM_S,eeg_embeds,0.174069,0.104549,2000,10
+ATM_S,image_embeds,0.217241,0.115240,2000,10
+ATM_S,pipe_output,0.230366,0.126305,2000,10
+MUSE,eeg_embeds,0.171752,0.104610,2000,10
+MUSE,image_embeds,0.217241,0.115240,2000,10
+MUSE,pipe_output,0.226568,0.119371,2000,10
+NICE,eeg_embeds,0.160388,0.102882,2000,10
+NICE,image_embeds,0.217241,0.115283,800,4
+NICE,pipe_output,0.203522,0.119696,2000,10
+Nerv1,eeg_embeds,0.136437,0.100706,2000,10
+Nerv1,image_embeds,0.217241,0.115240,2000,10
+Nerv1,pipe_output,0.195245,0.122127,2000,10
+Nerv2,eeg_embeds,0.181313,0.116002,8400,10
+Nerv2,image_embeds,0.235037,0.119786,6800,10
+Nerv2,pipe_output,0.204139,0.126474,8400,10
