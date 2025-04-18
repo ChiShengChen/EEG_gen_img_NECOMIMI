@@ -1,0 +1,33 @@
+# Git files
+.git/
+.gitignore
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environment folders
+env/
+venv/
+
+# IDE folders
+.vscode/
+.idea/
+
+# OS specific files
+.DS_Store
+
+# Docker files
+Dockerfile
+.dockerignore
+
+# Conda environment file (already copied separately)
+# environment.yml
+
+# Add any large data folders or output directories you don't want in the image
+# Example: data/
+# Example: results/
+# Example: Generation/gen_images_perturbed_visual/paper_img/*.png
+# Example: Generation/gen_images_perturbed_visual/paper_img/*.jpg 

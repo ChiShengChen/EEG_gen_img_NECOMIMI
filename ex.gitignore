@@ -1,0 +1,109 @@
+Generation/ckpts
+Generation/fintune_ckpts
+Generation/CLIP-dissect
+Generation/centralRepo
+Generation/__pycache__
+Generation/diffusers
+Generation/generated_imgs
+Generation/generated_imgs_tensor
+Generation/Generation
+Generation/generation_metric_outputs
+Generation/LAVIS
+Generation/models
+Generation/old_outputs
+Generation/outputs
+Generation/tab_generation_metric_outputs
+Generation/THINGS
+Generation/Visualize
+Generation/wandb
+Retrieval/__pycache__
+Retrieval/centralRepo
+Retrieval/CLIP-dissect
+Retrieval/conditional_outputs
+Retrieval/LAVIS
+Retrieval/old_outputs
+Retrieval/outputs
+Retrieval/Outputs
+Retrieval/sliding_window_outputs
+Retrieval/Visualize
+Retrieval/wandb
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Distribution / packaging
+dist/
+build/
+*.egg-info/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Virtual environments
+venv/
+env/
+ENV/
+
+# Data files
+*.npy
+*.npz
+*.pt
+*.pth
+*.h5
+*.hdf5
+*.pkl
+*.csv
+!/Retrieval/models/*/*.csv  # Keep result CSV files
+
+# Large model files
+Retrieval/models/*/*.pth
+Generation/*/weights/
+
+# Generated images
+gen_images/
+outputs/
+
+# Logs and temporary files
+wandb/
+logs/
+.DS_Store
+*.log
+*.swp
+
+# Environment
+.env
+.venv
+
+# IDE specific files
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# LAVIS build files
+LAVIS/build/
+
+# Large datasets (should be downloaded separately)
+eeg_dataset/raw_data/
+eeg_dataset/preprocessed_data/
+dnn_feature_maps/
+image_set/
+preprocessed_data/
+
+# Exception for model architecture files
+!*/NervformerV*_*.pyGeneration/sdxl-turbo/weights/
+# Large data files
+*.pt
+*.pth
+*.h5
+*.hdf5
+*.pkl
+*.npy
+*.npz
+eeg_dataset/
+dnn_feature_maps/
+image_set/
+preprocessed_data/
+Generation/*/weights/
