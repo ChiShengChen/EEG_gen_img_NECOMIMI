@@ -1,5 +1,8 @@
 # NECOMIMI: Neural-Cognitive Multimodal EEG-Informed Image Generation with Diffusion Models
 [![arXiv](https://img.shields.io/badge/arXiv-2410.00712-b31b1b.svg?style=flat-square)](https://arxiv.org/abs/2410.00712)  
+
+[JMIR paper](https://medinform.jmir.org/2025/1/e72027)  
+
 ## Abstract
 NECOMIMI introduces a groundbreaking framework for generating images directly from EEG signals using advanced diffusion models. This work not only pushes the boundaries of EEG-image classification but extends into image generation, presenting a novel EEG encoder, NERV, that shows state-of-the-art performance across multiple zero-shot classification tasks.
 
